@@ -38,7 +38,7 @@ for (file in bed_files) {
   bed_dataframes[[df_name]] <- get(df_name)
 }
 
-TPM <- read.table("reference_genes_TPM.tsv", sep="\t", 
+TPM <- read.table("reference_genes_TPM.tsv", sep ="\t", 
                    header = TRUE, row.names = 1, 
                    stringsAsFactors = FALSE)
 
@@ -145,6 +145,7 @@ all_genes <- unique(unlist(gene_sets))
 write.csv(all_genes, "unique_genes.csv", row.names=TRUE)
 
 ####################### NETWORKS - SAMPLES INTERSECTION ########################
+
 conflicts_prefer(base::intersect)    # base::intersect over any other package
 ## to avoid conflict
 
@@ -199,20 +200,20 @@ intestine_70En <- intestine_70dpf_T[, col_extracted_endoderm]
 intestine_NBEn <- intestine_NB_T[, col_extracted_endoderm]
 
 # Perform normality check
-pdf("qq_plots.pdf")  # Open PDF device
+#pdf("qq_plots.pdf")  # Open PDF device
 
-for (i in 1:61) {
+#for (i in 1:61) {
   # Open a new page for each plot
-  if (i > 1)
-    plot.new()
+  #if (i > 1)
+    #plot.new()
   
   # Set up the plot
-  par(mfrow=c(1, 1))  # Set up a single plot per page
-  qqnorm(test[,i], main = paste(i))
-  qqline(test[,i])
-}
+  #par(mfrow=c(1, 1))  # Set up a single plot per page
+  #qqnorm(test[,i], main = paste(i))
+  #qqline(test[,i])
+#}
 
-dev.off()  # Close PDF device
+#dev.off()  # Close PDF device
 
 # MESODERM
 col_extracted_mesoderm <- Reduce(intersect, list(colnames(muscle_30dpf_T), 
@@ -222,7 +223,7 @@ col_extracted_mesoderm <- Reduce(intersect, list(colnames(muscle_30dpf_T),
                                                  colnames(kidney_70dpf_T),
                                                  colnames(kidney_NB_T)))
 
-write.csv(col_extracted_mesoderm, "col_extracted_mesoderm.csv", row.names=TRUE)
+write.csv(col_extracted_mesoderm, "col_extracted_mesoderm.csv", row.names = TRUE)
 
 kidney_30Me <- kidney_30dpf_T[, col_extracted_mesoderm]
 kidney_70Me <- kidney_70dpf_T[, col_extracted_mesoderm]
@@ -240,7 +241,7 @@ col_extracted_ectoderm <- Reduce(intersect, list(colnames(hindbrain_30dpf_T),
                                                  colnames(skin_70dpf_T),
                                                  colnames(skin_NB_T)))
 
-write.csv(col_extracted_ectoderm, "col_extracted_ectoderm.csv", row.names=TRUE)
+write.csv(col_extracted_ectoderm, "col_extracted_ectoderm.csv", row.names = TRUE)
 
 hindbrain_30Ec <- hindbrain_30dpf_T[, col_extracted_ectoderm]
 hindbrain_70Ec <- hindbrain_70dpf_T[, col_extracted_ectoderm]
@@ -281,7 +282,7 @@ all <- c(hind_30, hind_70, hind_NB, liv_30, liv_70, liv_NB, skin_30, skin_70,
 
 all <- unique(all)
 
-# Establish connection to Ensembl
+# Establish connection to Ensembl (doesn't always work, alternative is httr & ensembldb)
 ensembl <- useMart("ensembl")
 ensembl_datasets <- listDatasets(ensembl)
 ensembl <- useDataset("sscrofa_gene_ensembl", mart = ensembl)
@@ -323,10 +324,10 @@ TPM_scaled <- as.matrix(TPM_scaled)   # for clustering
 ################## DATA EXPLORATION - CLUSTERING ALL ###########################
 
 # Cluster on samples
-hc <- hclust(as.dist(1-cor(TPM_scaled, method="spearman")), method="complete")
+hc <- hclust(as.dist(1-cor(TPM_scaled, method = "spearman")), method = "complete")
 
 # Cluster on genes
-hr <- hclust(as.dist(1-cor(t(TPM_scaled), method="pearson")), method="complete") 
+hr <- hclust(as.dist(1-cor(t(TPM_scaled), method = "pearson")), method = "complete") 
 
 # Optimal number of clusters
 set.seed(123)
@@ -430,7 +431,7 @@ OPTf_endoderm <- optPenalty.fused(Ylist = Ylist, Tlist = Tlist,
 
 ## Have a look at optimal penalties
 OPTf_endoderm$lambda.unique
-Plist <- ridgeP.fused(Slist=Rlist, ns=samps, lambda = OPTf_endoderm$lambda, maxit = 1000)
+Plist <- ridgeP.fused(Slist = Rlist, ns = samps, lambda = OPTf_endoderm$lambda, maxit = 1000)
 ## CN plots
 "do it separately for each data class - function needed"
 CNplot(r_L30En, Iaids = TRUE, 
