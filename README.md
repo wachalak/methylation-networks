@@ -5,13 +5,24 @@
 ---
 
 ## Table of Contents
-1. [Project Structure](#project-structure)
-2. [Installation](#installation)
-3. [Usage](#usage)
-4. [Data Sources](#data-sources)
-5. [Contributing](#contributing)
-6. [Contact](#contact)
-7. [License](#license)
+1. [Usage](#usage)
+2. [Contact](#contact)
+3. [License](#license)
+
+---
+
+## Usage
+To clone the repo use `git clone https://github.com/wachalak/Methylation-networks.git`
+
+The **Code** directory contains two files: pre_processing.sh and analyses.R.
+
+- pre_processing.sh gives the workflow to obtain bed files needed for the analyses with R. The initial data used in this study were collected by the GENE-SWitCH (https://www.gene-switch.eu/), and are available through the FAANG data portal at https://data.faang.org/projects/GENE-SWitCH.
+- analyses.R gives the complete workflow for joint fused ridge network modelling and analysis
+
+The **Data-post-processing** directory contains all files needed to conduct the analysis in analyses.R. The bed files have been compressed. To decompress all bed files in the directory you can run either:
+
+- `gunzip *.bed.gz`, or
+- `for file in *.bed.gz; do bgzip -d "$file"; done`
 
 ---
 
