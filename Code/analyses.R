@@ -25,7 +25,7 @@ conflicts_prefer(base::setdiff)
 ################################## LOAD DATA ###################################
 
 # Set working directory
-setwd("C:/Users/PRACA/Desktop/RP/Methylation_networks/Data")
+setwd("C:/Users/wachalak/Desktop/Methylation_networks/Data")
 
 bed_files <- list.files(pattern = "\\.bed$")
 bed_dataframes <- list()
