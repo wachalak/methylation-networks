@@ -1,4 +1,4 @@
-# Methylation-networks
+# methylation-networks
 
 **This repository contains the code and pre-processed data used in the study of tissue- and time-specific DNA methylation dynamics in Sus scrofa via joint fused ridge network modeling.**
 
@@ -12,7 +12,7 @@
 ---
 
 ## Usage
-To clone the repo use `git clone https://github.com/wachalak/Methylation-networks.git`
+To clone the repo use `git clone https://github.com/wachalak/methylation-networks.git`
 
 The **Code** directory contains two files: pre_processing.sh and analyses.R
 
